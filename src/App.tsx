@@ -10,8 +10,8 @@ const router = createBrowserRouter([
         element: <Home /> 
       },
       {
-        path: '/:postcode',
-        element: <Postcode />
+        path: '/:code',
+        element: <Postcode />,
       }
     ]
   }
