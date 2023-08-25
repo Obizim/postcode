@@ -20,7 +20,7 @@ interface Idata {
 
 function Postcode() {
   const { code } = useParams();
-  const [data, setData] = useState<Idata>();
+  const [data, setData] = useState<Idata | string>();
 
   useEffect(() => {
     const getData = async () => {
@@ -32,9 +32,15 @@ function Postcode() {
     getData();
   }, [code]);
 
+  if(typeof data === 'string') {
+    return <div>
+           Invalid Postcode
+    </div>
+  }
+
   return (
     <>
-      {data && (
+      {typeof data === 'object'  && (
         <section className="w-[760px] uppercase mx-auto px-4 my-8 py-6">
           <div className="space-y-3 text-sm">
             <h1 className="text-xl font-bold">
