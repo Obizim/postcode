@@ -10,14 +10,16 @@ function Home() {
     const submit = async (e: React.FormEvent) => {
         e.preventDefault()
         const search = query.trim().split(" ").join("")
-        const data =  await postcodeValidation(search)
-
-        if(data.result){
-            navigate(`/${search}`)
+        if(search.length < 1){
+            setError('Enter a Postcode!')
         }else{
-            setError('Invalid Postcode!')
+            const data =  await postcodeValidation(search)
+            if(data.result){
+                navigate(`/${search}`)
+            }else{
+                setError('Invalid Postcode!')
+            }
         }
-       
     }
     
     return <section className="flex items-center h-screen">

@@ -4,6 +4,7 @@ import Postcode from './pages/Postcode'
 
 const router = createBrowserRouter([
   {
+    errorElement: <div>This page doesn't exist. Go home!</div>,
     children: [
       {
         path: '/',

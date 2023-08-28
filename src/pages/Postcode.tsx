@@ -21,25 +21,24 @@ interface Idata {
 function Postcode() {
   const { code } = useParams();
   const [data, setData] = useState<Idata | string>();
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
       if (code) {
+        setLoading(true)
         const codes = await getPostCode(code);
         setData(codes);
+        setLoading(false)
       }
     };
     getData();
   }, [code]);
 
-  if(typeof data === 'string') {
-    return <div>
-           Invalid Postcode
-    </div>
-  }
-
   return (
     <>
+      {loading && <h2 className="font-semi-bold text-xl text-center my-10 uppercase">Loading...</h2>}
+      {typeof data === 'string' && <h2 className="font-semi-bold text-xl text-center my-10 uppercase">Invalid Postcode!!</h2>}
       {typeof data === 'object'  && (
         <section className="w-[760px] uppercase mx-auto px-4 my-8 py-6">
           <div className="space-y-3 text-sm">
@@ -51,7 +50,7 @@ function Postcode() {
             <p>Admin District: {data.postcode.result.admin_district}</p>
             <hr />
           </div>
-          <h2 className="text-xl font-bold pt-8">Nearest Postcode to N11 EQ</h2>
+          <h2 className="text-xl font-bold pt-8">Nearest Postcode to { code }</h2>
           <div className="flex flex-col">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
