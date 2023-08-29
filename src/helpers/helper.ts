@@ -1,6 +1,14 @@
+
+// Trim the inputted postcode, remove whitespace and as well, transfrom to uppercase
+export function cleanPostcode(postCode: string) {
+  return postCode.trim().split(" ").join("").toUpperCase()
+}
+
+
+
 const API_URL = 'http://api.postcodes.io/postcodes';
 
-// Validate the postcode entered by the user
+// function to validate the postcode entered by the user
 export async function postcodeValidation(postCode: string | undefined) {
   const res = await fetch(`${API_URL}/${postCode}/validate`);
 
@@ -12,7 +20,9 @@ export async function postcodeValidation(postCode: string | undefined) {
 
 
 //Get postcode data
-// Using promise.all to fecth concurrently both data (the postcode data and nearest postcodes as well)
+// validate the postcode as well
+// Using promise.all to fetch concurrently both data (the postcode data and nearest postcodes as well)
+// Should return either object of the fetched data or a string error
 export async function getPostCode(postCode: string | undefined) {
     try {
       const data = await postcodeValidation(postCode)
