@@ -6,7 +6,7 @@ export function cleanPostcode(postCode: string) {
 
 
 
-const API_URL = 'http://api.postcodes.io/postcodes';
+const API_URL = 'https://api.postcodes.io/postcodes';
 
 // function to validate the postcode entered by the user
 export async function postcodeValidation(postCode: string | undefined) {
